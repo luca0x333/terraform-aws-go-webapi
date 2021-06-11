@@ -1,1 +1,1 @@
-# terraform-go-webapi
+# terraform-aws-go-webapi
