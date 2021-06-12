@@ -14,15 +14,21 @@ terraform {
 }
 
 module "webserver_cluster" {
-  source = "github.com/luca0x333/terraform-modules//webserver-cluster?ref=v0.0.2"
+  source = "github.com/luca0x333/terraform-modules//webserver-cluster?ref=v0.0.6"
 
   cluster_name           = "webservers-staging"
   db_remote_state_bucket = "luca0x333-terraform-state"
   db_remote_state_key    = "staging/services/services/data-store/mysql/terraform.tfstate"
 
   instance_type = "t2.micro"
-  min_size = 1
-  max_size = 2
+  min_size      = 1
+  max_size      = 2
+  enable_autoscaling = false
+
+  custom_tags = {
+    Owner      = "team-sre"
+    DeployedBy = "terraform"
+  }
 }
 
 resource "aws_security_group_rule" "allow_testing_inbound" {
