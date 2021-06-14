@@ -16,9 +16,9 @@ terraform {
 module "rds_instance" {
   source = "../../../../modules/services/data-stores/mysql"
 
-  db_identifier = "rds-staging-example"
-  db_name = "db_staging"
-  db_admin = "admin"
-  db_password = var.db_password
+  db_identifier    = "rds-staging-example"
+  db_name          = "db_staging"
+  db_admin         = "admin"
+  db_password      = var.db_password
   db_instance_type = "db.t2.micro"
 }
