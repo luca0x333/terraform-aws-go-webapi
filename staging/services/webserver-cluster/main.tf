@@ -20,9 +20,10 @@ module "webserver_cluster" {
   db_remote_state_bucket = "luca0x333-terraform-state"
   db_remote_state_key    = "staging/services/services/data-store/mysql/terraform.tfstate"
 
-  instance_type = "t2.micro"
-  min_size      = 1
-  max_size      = 2
+  instance_type      = "t2.micro"
+  ami                = "ami-07dc734dc14746eab"
+  min_size           = 1
+  max_size           = 2
   enable_autoscaling = false
 
   custom_tags = {
