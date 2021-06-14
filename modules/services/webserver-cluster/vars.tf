@@ -24,6 +24,12 @@ variable "instance_type" {
   type        = string
 }
 
+variable "ami" {
+  description = "The AMI image"
+  default     = "ami-07dc734dc14746eab"
+  type        = string
+}
+
 variable "min_size" {
   description = "The minimum number of EC2 Instances in the ASG"
   type        = number

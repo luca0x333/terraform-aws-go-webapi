@@ -30,7 +30,7 @@ resource "aws_security_group_rule" "instance_allow_http_inbound" {
 }
 
 resource "aws_launch_configuration" "example" {
-  image_id        = "ami-07dc734dc14746eab"
+  image_id        = var.ami
   instance_type   = var.instance_type
   security_groups = [aws_security_group.instance.id]
 
@@ -46,14 +46,23 @@ resource "aws_launch_configuration" "example" {
 }
 
 resource "aws_autoscaling_group" "example" {
+  name = "${var.cluster_name}-${aws_launch_configuration.example.name}"
+
   launch_configuration = aws_launch_configuration.example.name
   vpc_zone_identifier  = data.aws_subnet_ids.default.ids
-
-  target_group_arns = [aws_alb_target_group.asg.arn]
-  health_check_type = "ELB"
+  target_group_arns    = [aws_alb_target_group.asg.arn]
+  health_check_type    = "ELB"
 
   min_size = var.min_size
   max_size = var.max_size
+
+  #
+  min_elb_capacity = var.min_size
+
+  # Create the new replacement first and then delete the original.
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tag {
     key                 = "Name"
