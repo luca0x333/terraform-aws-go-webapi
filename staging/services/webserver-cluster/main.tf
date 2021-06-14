@@ -14,7 +14,7 @@ terraform {
 }
 
 module "webserver_cluster" {
-  source = "github.com/luca0x333/terraform-modules//webserver-cluster?ref=v0.0.6"
+  source = "../../../modules/services/webserver-cluster"
 
   cluster_name           = "webservers-staging"
   db_remote_state_bucket = "luca0x333-terraform-state"
