@@ -14,7 +14,7 @@ terraform {
 }
 
 module "rds_instance" {
-  source = "github.com/luca0x333/terraform-modules//data-stores//mysql?ref=v0.0.2"
+  source = "../../../../modules/services/data-stores/mysql"
 
   db_identifier = "rds-production-example"
   db_name = "db_production"
