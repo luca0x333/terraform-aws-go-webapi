@@ -1,5 +1,11 @@
+terraform {
+  required_version = ">= 0.12, < 0.13"
+}
+
 provider "aws" {
   region = "eu-west-2"
+
+  version = "~> 2.0"
 }
 
 terraform {
@@ -13,12 +19,10 @@ terraform {
   }
 }
 
-module "rds_instance" {
-  source = "../../../../modules/services/data-stores/mysql"
+module "mysql" {
+  source = "../../../../modules/data-stores/mysql"
 
-  db_identifier    = "rds-staging-example"
-  db_name          = "db_staging"
-  db_admin         = "admin"
-  db_password      = var.db_password
-  db_instance_type = "db.t2.micro"
+  db_name     = var.db_name
+  db_username = var.db_username
+  db_password = var.db_password
 }
