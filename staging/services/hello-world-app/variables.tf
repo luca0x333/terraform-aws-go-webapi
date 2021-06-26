@@ -11,5 +11,5 @@ variable "db_remote_state_key" {
 variable "environment" {
   description = "The name of the environment we're deploying to"
   type        = string
-  default     = "production"
+  default     = "staging"
 }
